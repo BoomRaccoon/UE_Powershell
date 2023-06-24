@@ -27,14 +27,22 @@ Write-Host "Do you want to add a description? (y/n)"
 $selection = $Host.UI.RawUI.ReadKey()
 if($selection.Character -eq "y")
 {
-	$Description = Read-Host -Prompt "Please type in the description you want to use for the pack. (Can be changed afterwards inside manifest.json)"
+	while([Console]::KeyAvailable)
+	{
+
+	}
+	$Description = Read-Host -Prompt "`nPlease type in the description you want to use for the pack. (Can be changed afterwards inside manifest.json)"
 }
 
 Write-Host "Do you want to add search tags? (y/n)"
 $selection = $Host.UI.RawUI.ReadKey()
 if($selection.Character -eq "y")
 {
-	$Tags = Read-Host -Prompt "Type the search tags seperated with a comma like 'desert,landscape,net'. (Can be changed afterwards inside manifest.json)"
+	while([Console]::KeyAvailable)
+	{
+		
+	}
+	$Tags = Read-Host -Prompt "`nType the search tags seperated with a comma like 'desert,landscape,net'. (Can be changed afterwards inside manifest.json)"
 }
 
 $Path_Full = $Path_targetDir + $Name_Pack
@@ -43,7 +51,7 @@ $Path_Full = $Path_targetDir + $Name_Pack
 
 
 # region StringsForFiles
-$ManifestContent = 
+$Content_Manifest = 
 @"
 {
 	"Version": 1,
@@ -72,10 +80,10 @@ $ManifestContent =
 	],
 	"ClassTypes": "",
 	"Category": "Content",
-	"Thumbnail": "$($Name_Pack).png",
+	"Thumbnail": "$($Name_Pack)_CardIcon.png",
 	"Screenshots":
 	[
-		"$($Name_Pack)_Preview.png"
+		"$($Name_Pack).png"
 	]
 }
 "@
@@ -106,9 +114,9 @@ New-Item -ItemType Directory -Path ($Path_Full + "\ContentSettings")
 New-Item -ItemType Directory -Path ($Path_Full + "\ContentSettings\Config")
 New-Item -ItemType Directory -Path ($Path_Full + "\ContentSettings\Media")
 New-Item -Path ($Path_Full + "\ContentSettings\Media\$($Name_Pack).png")
-New-Item -Path ($Path_Full + "\ContentSettings\Media\$($Name_Pack)_Preview.png")
+New-Item -Path ($Path_Full + "\ContentSettings\Media\$($Name_Pack)_CardIcon.png")
 New-Item -Path ($Path_Full + "\ContentSettings\manifest.json")
-Set-Content ($Path_Full + "\ContentSettings\manifest.json")  $ManifestContent
+Set-Content ($Path_Full + "\ContentSettings\manifest.json")  $Content_Manifest
 New-Item -Path ($Path_Full + "\ContentSettings\Config\config.ini")
 Set-Content ($Path_Full + "\ContentSettings\Config\config.ini") $ConfigContent
 
