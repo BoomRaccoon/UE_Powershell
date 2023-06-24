@@ -7,6 +7,14 @@ Main steps are:
 - then run GeneratePack where 'ContentToPack' is located
 - finally copy the 'FeaturePacks' + 'Samples' directories inside of your UE5 directory (you know you are in the right place if you see DIRs with those names)
   
+
+(UE)AddModule.ps1
+- go to your projects 'Source' directory and run the script
+- you are asked for a module name
+- folder with this name will be created
+- contains 'Public' 'Private' folder and the '.Build.cs' file with basic includes
+- empty '.h' and '.cpp' files are added to 'Public' 'Private'
+
 ## Add preview images
 Add the images you want as a preview inside of 'ContentSettings/Media/' directory, the names are already
 set and you can just save and override them.
